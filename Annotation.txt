@@ -1,0 +1,78 @@
+Q1
+public class OutputFileTest		
+	{
+    	private File output; 
+    	@Before public void createOutputFile() 
+ 	 { 
+       output = new File(...);
+    	}
+  
+	@After public void deleteOutputFile() 
+   		{
+        output.delete(); 
+   	} 
+     
+    @Test public void testFile1() 
+    		{
+       
+   		} 
+	@Test public void testFile2() 
+   	 {
+       
+    		}
+}
+-------------------------------------------------------------------------
+Q2:
+package annotations;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+import java.lang.annotation.RetentionPolicy;
+
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface info {
+
+	String name();
+	String supervisor()default "ONKAR";
+	int version();
+	int AuthorID();
+	String Author() default "GOURAV";
+	String Date();
+	String Time();
+	String desp() default "hello its annotation program";
+	
+}
+package annotations;
+
+
+import java.lang.annotation.*;
+
+public class Annotation {
+public static void main(String[] args) {
+		Information i=new Information("extra info");
+		Class c = i.getClass();
+		java.lang.annotation.Annotation an=c.getAnnotation(info.class);
+		info in=(info)an;
+		System.out.println(in.Date());
+		System.out.println(in.AuthorID());
+		System.out.println(in.Time());
+		System.out.println(in.version());	
+	}
+}
+
+
+
+@info(name="Gourav",version=6,AuthorID=123,Date="23.02.1999",Time="12:30")
+class Information{
+	String extrainfo;
+
+	public Information(String extrainfo) {
+		super();
+		this.extrainfo = extrainfo;
+	}
+	
+	
+}
+-----------------------------------------------------------------------------------------
